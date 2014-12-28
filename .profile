@@ -67,9 +67,9 @@ echo $1;
 
 
 function input() {
-	echo "input?"
-	read $input
-	echo $input
+echo "input?"
+read $input
+echo $input
 }
 
 function args() {
@@ -91,7 +91,8 @@ echo $1 $2 $3 $4;
 
 
 alias gitinit="git init"
-alias gits="git status -s"
+alias gitdiff="git diff"
+alias gits="git status -s; gitdiff"
 alias gitadd="git add --all"
 alias gitpush="git push -u origin master"
 
@@ -224,8 +225,7 @@ alias sublime="subl"
 alias reload="source ~/.profile"
 alias profile="sublime ~/.profile"
 alias desktop="cd ~/desktop"
-alias cdsublime="cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/"
-
+alias packages="cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User"
 
 alias downloads="cd ~/downloads"
 alias documents="cd ~/documents"
