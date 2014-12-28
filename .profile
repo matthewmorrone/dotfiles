@@ -90,9 +90,36 @@ echo $1 $2 $3 $4;
 }
 
 
+
+alias gitdiff="git diff --ignore-blank-lines --minimal"
+
+# -- minimal
+# summary
+# -MC
+# -bwW --ignore-blank-lines --ignore-space-at-eol
+
+# -W, --function-context
+#     Show whole surrounding functions of changes.
+
+# --diff-filter=[(A|C|D|M|R|T|U|X|B)...[*]]
+# added (A)
+# copied (C)
+# deleted (D)
+# modified (M)
+# renamed (R)
+# type changed (T)
+# unmerged (U)
+# unknown (X)
+# pairing broken (B)
+# all-or-none (*)
+
+
+
+
+
+
 alias gitinit="git init"
-alias gitdiff="git diff"
-alias gits="git status -s; gitdiff"
+alias gits="git status -s"
 alias gitadd="git add --all"
 alias gitpush="git push -u origin master"
 
