@@ -50,64 +50,119 @@ pwd
 ls
 }
 
-
-
-
-# function git-master()
-# {
-# # for x in *.png;
-# # 	do mv $x test/${x%.png} test.png;
-# # done
-# # find . -depth -name "*from_stuff*" -execdir sh -c 'mv {} $(echo {} | sed "s/from_stuff/to_stuff/")' \;
-# # #!/bin/sh
-# # for file in *-master
-# # do
-# # 	new=${*}
-# # 	mv $file $new
-# # done
-# echo $1;
-# }
-function gitstart() {
-# if [$1]
-# then
-# repo_name=$1
-# else
-echo "Repo name?"
-read repo_name
-# fi
-
-curl -u 'matthewmorrone1:1b3795a12b756b363f6def638723c360abdf6649' https://api.github.com/user/repos -d '{"name":"'$repo_name'"}'
-mkdir $repo_name
-cd $repo_name
-git init
-git remote add origin https://github.com/matthewmorrone1/$repo_name.git
-# git push -u origin master
-}
-function gitclone()
+function gitmaster()
 {
-git clone https://github.com/matthewmorrone1/$1.git
-cd $1
-
-# git clone https://github.com/$1/$2.git
-# cd $2
+# for x in *.png;
+# 	do mv $x test/${x%.png} test.png;
+# done
+# find . -depth -name "*from_stuff*" -execdir sh -c 'mv {} $(echo {} | sed "s/from_stuff/to_stuff/")' \;
+#!/bin/sh
+for file in *-master
+do
+new=${*}
+mv $file $new
+done
+echo $1;
 }
 
 
-alias gitremote="git remote add origin https://github.com/matthewmorrone1/$1"
+function input() {
+	echo "input?"
+	read $input
+	echo $input
+}
+
+function args() {
+echo $# "arguments"
+if [ $# = 1 ]
+then
+echo "one argument"
+fi
+if [ $# = 2 ]
+then
+echo "two arguments"
+fi
+if [ $# = 3 ]
+then
+echo "three arguments"
+fi
+echo $1 $2 $3 $4;
+}
+
+
 alias gitinit="git init"
 alias gits="git status -s"
 alias gitadd="git add --all"
-alias gitcom="git commit -m $1"
 alias gitpush="git push -u origin master"
 
+function gitstart() {
+if [ "$#" = "1" ]
+then
+$repo_name = $1
+else
+echo "Repo name?"
+read $repo_name
+fi
+curl -u 'matthewmorrone1:1b3795a12b756b363f6def638723c360abdf6649' https://api.github.com/user/repos -d '{"name":"'$repo_name'"}'
+mkdir -p $repo_name
+cd $repo_name
+git init
+git remote add origin https://github.com/matthewmorrone1/$repo_name.git
+}
+
+function gitclone()
+{
+if [ "$#" = "1" ]
+then
+git clone "https://github.com/matthewmorrone1/$1.git"
+cd "$1"
+else
+if [ "$#" = "2" ]
+then
+git clone "https://github.com/$1/$2.git"
+cd "$2"
+fi
+fi
+}
+
+function gitremote()
+{
+if [ "$#" = "1" ]
+then
+git remote add origin "https://github.com/matthewmorrone1/$1.git"
+else
+if [ "$#" = "2" ]
+then
+git remote add origin "https://github.com/$1/$2.git"
+fi
+fi
+}
+
+
+function gitcom()
+{
+if [ "$#" = "1" ]
+then
+$commit_message = $1
+else
+echo "commit message?"
+read $commit_message
+fi
+git commit -m "\"$commit_message\""
+}
 
 function gitr()
 {
 gits
 gitadd
+if [ "$#" = "1" ]
+then
+$commit_message = $1
+else
 echo "commit message?"
-read commit_message
-gitcom commit_message
+read $commit_message
+fi
+git commit -m "\"$commit_message\""
 gitpush
 echo "done"
 }
@@ -156,8 +211,8 @@ alias npmls="npm -g --depth=0 ls"
 alias npminfo="package-info"
 # alias npmi="npm install -g"
 function npmi() {
-	package-info $1;
-	npm install -g $1;
+package-info $1;
+npm install -g $1;
 }
 
 
@@ -261,41 +316,41 @@ killall Dock
 # 	unset PROMPT_COMMAND
 # 	PATH=$__OLD_PATH
 # }
-# node-mode  # Uncomment to enable node-mode by default
+# node-mode# Uncomment to enable node-mode by default
 
 
 
 # Normal Colors
-Black='\e[0;30m'        # Black
-Red='\e[0;31m'          # Red
-Green='\e[0;32m'        # Green
-Yellow='\e[0;33m'       # Yellow
-Blue='\e[0;34m'         # Blue
-Purple='\e[0;35m'       # Purple
-Cyan='\e[0;36m'         # Cyan
-White='\e[0;37m'        # White
+Black='\e[0;30m'# Black
+Red='\e[0;31m'# Red
+Green='\e[0;32m'# Green
+Yellow='\e[0;33m' # Yellow
+Blue='\e[0;34m' # Blue
+Purple='\e[0;35m' # Purple
+Cyan='\e[0;36m' # Cyan
+White='\e[0;37m'# White
 
 # Bold
-BBlack='\e[1;30m'       # Black
-BRed='\e[1;31m'         # Red
-BGreen='\e[1;32m'       # Green
-BYellow='\e[1;33m'      # Yellow
-BBlue='\e[1;34m'        # Blue
-BPurple='\e[1;35m'      # Purple
-BCyan='\e[1;36m'        # Cyan
-BWhite='\e[1;37m'       # White
+BBlack='\e[1;30m' # Black
+BRed='\e[1;31m' # Red
+BGreen='\e[1;32m' # Green
+BYellow='\e[1;33m'# Yellow
+BBlue='\e[1;34m'# Blue
+BPurple='\e[1;35m'# Purple
+BCyan='\e[1;36m'# Cyan
+BWhite='\e[1;37m' # White
 
 # Background
-On_Black='\e[40m'       # Black
-On_Red='\e[41m'         # Red
-On_Green='\e[42m'       # Green
-On_Yellow='\e[43m'      # Yellow
-On_Blue='\e[44m'        # Blue
-On_Purple='\e[45m'      # Purple
-On_Cyan='\e[46m'        # Cyan
-On_White='\e[47m'       # White
+On_Black='\e[40m' # Black
+On_Red='\e[41m' # Red
+On_Green='\e[42m' # Green
+On_Yellow='\e[43m'# Yellow
+On_Blue='\e[44m'# Blue
+On_Purple='\e[45m'# Purple
+On_Cyan='\e[46m'# Cyan
+On_White='\e[47m' # White
 
-NC="\e[m"               # Color Reset
+NC="\e[m" # Color Reset
 
 
 clear
