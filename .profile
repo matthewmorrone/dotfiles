@@ -184,10 +184,10 @@ function gitcom()
 {
 if [ "$#" = "1" ]
 then
-$commit_message = $1
+commit_message = $1
 else
 echo "commit message?"
-read $commit_message
+read commit_message
 fi
 git commit -m "\"$commit_message\""
 }
