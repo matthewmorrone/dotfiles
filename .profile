@@ -182,13 +182,13 @@ fi
 # not 100% sure why this displays extra stuff
 function gitcom()
 {
-if [ "$#" = "1" ]
-then
-commit_message = $1
-else
+# if [ "$#" = "1" ]
+# then
+# commit_message = $1
+# else
 echo "commit message?"
 read commit_message
-fi
+# fi
 git commit -m "\"$commit_message\""
 }
 
