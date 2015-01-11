@@ -7,8 +7,6 @@
 !.gitconfig
 !.gitignore
 !.profile
-# !.
-# etc...
 
 # ...even if they are in subdirectories
 # !*/
